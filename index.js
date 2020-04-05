@@ -44,19 +44,12 @@ server.use(logRequests, (req,res, next) => {
   console.log(`Método: ${req.method}; URL: ${req.url}`);
   next();
   console.timeEnd('Request');
-  console.log()
 });
 
 server.get('/projects', (req, res) => {
-  //console.log(`Lista de usuários:`, users);
   return res.json(projects);
 });
 
-// server.get('/projects/:id', (req, res) => {
-//   //console.log(`Lista de usuários:`, users);
-//   const { id } = req.params;
-//   return res.json(projects);
-// })
 
 server.post('/projects', checkTitleInArray, (req, res) => {
   const {title } = req.body;
@@ -70,8 +63,6 @@ server.post('/projects', checkTitleInArray, (req, res) => {
   };
 
   projects.push(project);
-
-  //console.log(`Lista de projetos:`, projects);
 
   return res.json(project);
   
@@ -106,7 +97,6 @@ server.post('/projects/:id/tasks',checkProjectIdExists, checkTitleInArray,  (req
   const project = projects.find(p => p.id == id);
 
   project.tasks.push(title)
-  //console.log(`Lista de projetos:`, projects);
 
   return res.json(project);
 });
